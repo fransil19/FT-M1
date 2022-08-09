@@ -1,6 +1,7 @@
 'use strict'
 
 function BinarioADecimal(num) {
+  //Se separa cada caracter de la cadena en una lista.
   let lista = num.split("")
   
   let nueva_lista = lista.map((numero,indice) => {
