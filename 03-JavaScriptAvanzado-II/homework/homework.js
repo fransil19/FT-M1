@@ -6,7 +6,9 @@ function counter() {
   /*
   Ejercicio 1
 
-  La función counter debe retornar otra función. Esta función retornada debe actuar como un contador, retornando un valor numérico que empieza en 1 e incrementa con cada invocación.
+  La función counter debe retornar otra función. 
+  Esta función retornada debe actuar como un contador, retornando un valor numérico que empieza en 1 e incrementa 
+  con cada invocación.
 
   Ejemplo:
   const nuevoContador = counter()
@@ -18,7 +20,7 @@ function counter() {
   otroContador()      // 1
   otroContador()      // 2
   otroContador()      // 3
-   */
+  */
 
   let contador = 0;
   return function(){
@@ -30,8 +32,10 @@ function cacheFunction(cb) {
   /*
   Ejercicio 2
 
-  Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback que recibe por parámetro (cb); es decir, que "recuerde" el resultado 
-  de cada operación que hace, de manera que, al realizar una operación por segunda vez, se pueda obtener el resultado de esa "memoria" sin tener que efectuar otra vez cálculos que 
+  Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback que 
+  recibe por parámetro (cb); es decir, que "recuerde" el resultado 
+  de cada operación que hace, de manera que, al realizar una operación por segunda vez, se pueda 
+  obtener el resultado de esa "memoria" sin tener que efectuar otra vez cálculos que 
   ya se hicieron anteriormente.
 
   cacheFunction debe retornar una función. Esta función debe aceptar un argumento (arg) e invocar a cb con ese argumento; hecho eso, debe guardar el argumento junto con el 
@@ -53,10 +57,9 @@ function cacheFunction(cb) {
   const memory = {};
   return function(arg){
     if(!memory.hasOwnProperty(arg)){
-      console.log("Ejecuto")
       memory[arg] = cb(arg);
+      return memory[arg]
     }
-    console.log("Ya estaba")
     return memory[arg];
   }
 }
@@ -91,6 +94,9 @@ let getNombreAlumno;
 getNombreInstructor = getNombre.bind(instructor);
 getNombreAlumno = getNombre.bind(alumno);
 
+console.log(getNombreInstructor());
+console.log(getNombreAlumno());
+
 /*
   Ejercicio 4
   
@@ -110,8 +116,6 @@ let textoUnderscore;
 textoAsteriscos = crearCadena.bind(this,'*','*');
 textoGuiones = crearCadena.bind(this,'-','-');
 textoUnderscore = crearCadena.bind(this,'_','_');
-
-
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
