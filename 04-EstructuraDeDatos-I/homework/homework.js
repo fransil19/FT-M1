@@ -36,22 +36,19 @@ Pueden utilizar class o función constructora.
 
 function Queue() {
   this.queue = []
-  this.length = 0
   this.enqueue = function(val){
     this.queue.push(val)
-    this.length++
   }
 
   this.dequeue = function(){
-    if(this.length===0){
+    if(this.queue.length===0){
       return undefined
     }
-    this.length--
     return this.queue.shift()
   }
 
   this.size = function(){
-    return this.length
+    return this.queue.length
   }
 }
 
