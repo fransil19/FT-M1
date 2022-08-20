@@ -110,20 +110,20 @@ function HashTable() {
     const bucket = this.hash(clave);
     const obj = {}
     obj[clave] = valor
-
+    //Verifico si ya existe un arreglo en el bucket y si no existe lo creo y agrego el objeto.
     if(!Array.isArray(this.buckets[bucket])){
       const arreglo = []
       arreglo.push(obj)
       this.buckets[bucket] = arreglo
     }
-    else if(this.hasKey(clave)){
+    else if(this.hasKey(clave)){//Verifico si ya existe la clave en el bucket, si existe lo busco y lo reemplazo (podria reemplazar tambien el valor)
       for(let i=0; i<this.buckets[bucket].length; i++){
         if(this.buckets[bucket][i].hasOwnProperty(clave)){
           this.buckets[bucket][i] = obj;
         }
       }
     }
-    else{
+    else{//Si ya existe el arreglo en el bucket y no existe la clave, lo agrego asi evito colision
       this.buckets[bucket].push(obj);
     }
     
@@ -131,7 +131,7 @@ function HashTable() {
 
   this.get = function(clave){
     for(let i=0; i<this.buckets.length; i++){
-      if(this.buckets[i]){
+      if(this.buckets[i]){//Verifico si el bucket esta vacio o no, de no estar vacio recorro para verificar si existe la clave, si existe retorno su valor
         for(let j=0; j<this.buckets[i].length; j++){
           if(this.buckets[i][j].hasOwnProperty(clave)){
             return this.buckets[i][j][clave];
@@ -143,7 +143,7 @@ function HashTable() {
 
   this.hasKey = function(clave){
     for(let i=0; i<this.buckets.length; i++){
-      if(this.buckets[i]){
+      if(this.buckets[i]){//Verifico si el bucket esta vacio o no, de no estar vacio recorro para verificar si existe la clave, si existe indico su existencia retornando true, de lo contrario false
         for(let j=0; j<this.buckets[i].length; j++){
           if(this.buckets[i][j].hasOwnProperty(clave)){
             return true;
