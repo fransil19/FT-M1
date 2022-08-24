@@ -11,23 +11,21 @@
   El ábrol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
 */
 
-
-
 function BinarySearchTree(data) {
   this.left = null;
   this.right = null;
   this.value = data;
 
   this.size = function(){
-    if(!this.left && !this.right) return 0
-    if(this.left && !this.right){
-      return 1+this.left.size()+1
+    if(this.left === null && this.right === null) return 1 //Si no tiene hijos devuelvo 0 
+    if(this.left !== null && this.right === null){
+      return 1+this.left.size()
     }
-    else if(!this.left && this.right){
-      return 1+this.right.size()+1;
+    else if(this.left === null && this.right !== null){
+      return 1+this.right.size();
     }
     else{
-      return 1+(this.left.size()+1)+(this.right.size()+1)
+      return 1+this.left.size()+this.right.size()
     }
   }
 
@@ -70,8 +68,43 @@ function BinarySearchTree(data) {
       return false
     }
   }
-  this.depthFirstForEach = function(){}
-  this.breadthFirstForEach = function(){}
+
+  this.depthFirstForEach = function(cb,order='in-order'){
+    let current = this
+    if(order === 'pre-order'){
+      cb(this.value);
+      if(this.left !== null) this.left.depthFirstForEach(cb,order);
+      if(this.right !== null) this.right.depthFirstForEach(cb,order);
+      
+    }
+    else if(order === 'post-order'){
+      if(this.left !== null) this.left.depthFirstForEach(cb,order);
+      if(this.right !== null) this.right.depthFirstForEach(cb,order);
+      cb(this.value);
+    }
+    else{
+      if(this.left !== null) this.left.depthFirstForEach(cb,order);
+      cb(this.value);
+      if(this.right !== null) this.right.depthFirstForEach(cb,order);
+    }
+  }
+
+  this.breadthFirstForEach = function(cb,queue = []){
+    //guarda lo que hay en la izquierda
+    if(this.left !== null){
+      queue.push(this.left);
+    }
+    //guarda lo que hay en la derecha
+    if(this.right !== null){
+      queue.push(this.right);
+    }
+    //guarda lo que hay en el nodo que estoy viendo
+    cb(this.value);
+    //chequeo si hay elementos en la cola
+    if(queue.length > 0){
+      queue.shift().breadthFirstForEach(cb,queue)
+    }
+  }
 }
 
 // No modifiquen nada debajo de esta linea
