@@ -21,18 +21,12 @@ function quickSort(array) {
       }
     }
     pivot = [array[pivot]]
-    if(leftArray.length !== 0 && rightArray.length === 0){
-      return [].concat(quickSort(leftArray)).concat(pivot)
-    }
-    else if(leftArray.length === 0 && rightArray.length !== 0){
-      return [].concat(pivot).concat(quickSort(rightArray))
-    }
-    else{
-      return [].concat(quickSort(leftArray)).concat(pivot).concat(quickSort(rightArray))
-    }
-    
+    return quickSort(leftArray).concat(pivot).concat(quickSort(rightArray))
   }
-  return array
+  else{
+    return array
+  }
+  
 }
 
 function mergeSort(array) {
